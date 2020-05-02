@@ -1,0 +1,10 @@
+<app-alert></app-alert>
+
+<app-menu></app-menu>
+
+<div style="text-align:center">
+  <div *ngIf="route == ''">
+    <button type="button" class="btn btn-danger" (click) ="createDB()">Create Database</button>
+  </div>
+  
+<router-outlet></router-outlet>

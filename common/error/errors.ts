@@ -1,0 +1,7 @@
+export enum ERROR_TYPE {
+    NONE,
+    UNKNOWN,
+    MISSING_FIELDS,
+    ALLREADY_EXISTS,
+    BASIC,
+}

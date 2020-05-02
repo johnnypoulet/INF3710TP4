@@ -1,0 +1,15 @@
+export default  {
+        Server: Symbol("Server"),
+        Application: Symbol("Application"),
+        DatabaseController: Symbol("DatabaseController"),
+        DatabaseService: Symbol("DatabaseService"),
+        AuthentificationController: Symbol("AuthentificationController"),
+        EncryptService: Symbol("EncryptService"),
+        AuthentificationService: Symbol("AuthentificationService"),
+        MemberController: Symbol("MemberController"),
+        MemberService: Symbol("MemberServie"),
+        AdminController: Symbol("AdminController"),
+        AdminService: Symbol("AdminService"),
+        FilmController: Symbol("FilmController"),
+        FilmService: Symbol("FilmService"),
+};

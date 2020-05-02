@@ -1,0 +1,25 @@
+<nav class="navbar navbar-dark bg-dark mb-5">
+  <a class="navbar-brand title" href="/">INF3710-TP4</a>
+  <div class="navbar-expand mr-auto">
+    <!-- Visitor navbar -->
+    <div *ngIf="!this.memberLoggedIn && !this.adminLoggedIn" class="navbar-nav">
+      <a class="nav-item nav-link " routerLink="">Visitor</a>
+    </div>
+    <!-- Member navbar -->
+    <div *ngIf="this.memberLoggedIn" class="navbar-nav">
+      <a class="nav-item nav-link " routerLink="/membre">Films</a>
+    </div>
+    <!-- Admin navbar -->
+    <div *ngIf="this.adminLoggedIn" class="navbar-nav">
+      <a class="nav-item nav-link " routerLink="/admin">Administration - toutes les tables</a>
+      <a class="nav-item nav-link " routerLink="/admin/membre">Ajouter un membre</a>
+      <a class="nav-item nav-link " routerLink="/admin/film">Film</a>
+    </div>
+
+  </div>
+  <!-- Right section -->
+  <button *ngIf="!this.memberLoggedIn && !this.adminLoggedIn" class="btn btn-outline-warning my-2 my-sm-0"
+    (click)="openLoginModal() ">Se connecter</button>
+  <button *ngIf="this.memberLoggedIn || this.adminLoggedIn" class="btn btn-outline-warning my-2 my-sm-0"
+    (click)="logOut() ">Se déconnecter</button>
+</nav>

@@ -1,0 +1,17 @@
+<h1>Section Film</h1>
+<hr>
+<h6>Choisir une table pour afficher ses informations</h6>
+<div class="row justify-content-center">
+    <div class="col-md-3">
+        <select class="form-control" [(ngModel)]="selectedTable" (change)="getTable();">
+            <option disabled>Choisir une table de la db</option>
+            <option [value]="table.dbName" *ngFor="let table of tables"> {{table.label}}</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <app-generic-table *ngIf="selectedTable" [headers]="headers" [table-data]="tableData"></app-generic-table>
+
+    </div>
+</div>

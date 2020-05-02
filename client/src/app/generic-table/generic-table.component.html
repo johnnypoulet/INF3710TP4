@@ -1,0 +1,38 @@
+<div class="px-3 mt-5">
+    <div class="row justify-content-center">
+        <label class="col-md-3 text-right">Chercher</label>
+        <input type="text" class="form-control col-md-3" [(ngModel)]="searchText" (input)="searchField()">
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+
+            <table [class]="_tableClass">
+                <caption *ngIf="_caption.length>0 ">{{_caption}}</caption>
+                <thead *ngIf="_headers.length>0">
+                    <tr>
+                        <th *ngIf="areButtonsShow()" class="first-td">
+                            <button class="btn fa fa-plus" *ngIf="showAddButton" (click)="add()" placement="top"
+                                ngbTooltip="Ajouter"></button>
+                        </th>
+                        <th scope="col" class="clickable" *ngFor="let header of _headers; let i = index"
+                            (click)="sortColumn(i)">{{header}} <span *ngIf="columnSortIndex === i"
+                                [class]="getSortedClass()"></span></th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="_data.length>0">
+                    <tr *ngFor="let row of _data; let rowIndex = index">
+                        <td class="first-td" *ngIf="areButtonsShow()">
+                            <button *ngIf="showDeleteButton" class="btn fa fa-trash" (click)="delete(rowIndex)"
+                                placement="top" ngbTooltip="Supprimer"></button>
+                            <button *ngIf="showEditButton" class="btn fa fa-edit" (click)="edit(rowIndex)"
+                                placement="top" ngbTooltip="Éditer"></button>
+                        </td>
+                        <td class="clickable" *ngFor="let field of row; let dataIndex = index"
+                            (click)="rowClicked(rowIndex)">
+                            {{field}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

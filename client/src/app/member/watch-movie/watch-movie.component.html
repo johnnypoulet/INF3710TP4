@@ -1,0 +1,24 @@
+<div *ngIf="loading">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="spinner-border text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="film && !loading">
+    <h3>On regarde {{film.title}}</h3>
+    <hr>
+    <div class="row justify-content-center">
+        <youtube-player [videoId]="film.youtubeid" (ready)="playerReady($event)" (stateChange)="onPlayerStateChange($event)"></youtube-player>
+    </div>
+
+    <div class="row justify-content-end">
+        <div class="col-md-8">
+            <button class="btn btn-dark" (click)="return()">Retour à la liste des films</button>
+        </div>
+    </div>
+</div>

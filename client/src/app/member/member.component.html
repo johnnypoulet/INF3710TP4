@@ -1,0 +1,94 @@
+<h3>{{title}}</h3>
+<hr>
+<div *ngIf="!watchMode">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <app-generic-table [headers]="headers" [table-data]="filmDisplay" (rowClicked)="selectFilm($event)"
+                [event-config]="eventsConfig" [table-class]="'table table-hover'">
+            </app-generic-table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="watchMode && loading">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="spinner-border text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="watchMode && !loading">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">Titre</dt>
+                <dd class="col-sm-8">{{currentFilmInfos.film.title}}</dd>
+
+                <dt class="col-sm-4">Genre</dt>
+                <dd class="col-sm-8">{{currentFilmInfos.film.genre}}</dd>
+
+                <dt class="col-sm-4">Date de production</dt>
+                <dd class="col-sm-8">{{currentFilmInfos.film.dateprod}}</dd>
+
+                <dt class="col-sm-4">Duré</dt>
+                <dd class="col-sm-8">{{currentFilmInfos.film.duration}} min</dd>
+
+                <dt *ngIf="currentFilmInfos.Actors.length!=0" class="col-sm-4">Acteurs</dt>
+                <dd *ngIf="currentFilmInfos.Actors.length!=0" class="col-sm-8">
+                    <p *ngFor="let actor of currentFilmInfos.Actors"> {{actor}}</p>
+                </dd>
+
+                <dt *ngIf="currentFilmInfos.Productors.length!=0" class="col-sm-4">Producteurs</dt>
+                <dd *ngIf="currentFilmInfos.Productors.length!=0" class="col-sm-8">
+                    <p *ngFor="let productor of currentFilmInfos.Productors"> {{productor}}</p>
+                </dd>
+
+                <dt *ngIf="currentFilmInfos.Directors.length!=0" class="col-sm-4">Réalisateur</dt>
+                <dd *ngIf="currentFilmInfos.Directors.length!=0" class="col-sm-8">
+                    <p *ngFor="let director of currentFilmInfos.Directors"> {{director}}</p>
+                </dd>
+
+                <dt *ngIf="currentFilmInfos.PhotoDirectors.length!=0" class="col-sm-4">Directeurs Photo</dt>
+                <dd *ngIf="currentFilmInfos.PhotoDirectors.length!=0" class="col-sm-8">
+                    <p *ngFor="let pd of currentFilmInfos.PhotoDirectors"> {{pd}}</p>
+                </dd>
+
+                <dt class="col-sm-3"
+                    *ngIf="currentFilmInfos.OscarNomination.BestMovie.date[0] || currentFilmInfos.OscarNomination.BestActor.date[0] || currentFilmInfos.OscarNomination.BestDirector.date[0]">
+                    Nominations aux oscars</dt>
+                <dd class="col-sm-9">
+                    <dl class="row">
+                        <dt class="col-sm-12" *ngIf="currentFilmInfos.OscarNomination.BestMovie.date[0]">Meilleur film
+                            ({{currentFilmInfos.OscarNomination.BestMovie.date[0] | date:'yyyy'}})
+                            ({{currentFilmInfos.OscarNomination.BestMovie.won[0]?'Gagné':'Nominé'}})</dt>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col-sm-12" *ngIf="currentFilmInfos.OscarNomination.BestActor.date[0]">Meilleur
+                            acteurs
+                            ({{currentFilmInfos.OscarNomination.BestActor.date[0] | date:'yyyy'}})
+                            ({{currentFilmInfos.OscarNomination.BestActor.won[0]?'Gagné':'Nominé'}})</dt>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col-sm-12" *ngIf="currentFilmInfos.OscarNomination.BestDirector.date[0]">Meilleur
+                            réalisateur ({{currentFilmInfos.OscarNomination.BestDirector.date[0] | date:'yyyy'}})
+                            ({{currentFilmInfos.OscarNomination.BestDirector.won[0]?'Gagné':'Nominé'}})</dt>
+                    </dl>
+                </dd>
+
+            </dl>
+            <div class="row justify-content-end">
+                <div class="col-md-12">
+                    <button class="btn btn-light" (click)="return()">Retour aux films</button>
+                    <span> | </span>
+                    <button class="btn btn-dark" (click)="watchMovie(currentFilmInfos.film.idfilm)">Regarder le film</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

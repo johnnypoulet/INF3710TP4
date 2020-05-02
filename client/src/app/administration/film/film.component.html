@@ -1,0 +1,96 @@
+<h1>Section Film</h1>
+<hr>
+<div *ngIf="displayMode">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <app-generic-table [headers]="headers" [table-data]="filmDisplay" [table-caption]="'Tous les films'"
+                (add-data)="add()" (delete)="delete($event)" (edit)="edit($event)" (rowClicked)="edit($event)"
+                [event-config]="eventsConfig" [table-class]="'table table-hover'"></app-generic-table>
+        </div>
+    </div>
+
+</div>
+<div *ngIf="!displayMode">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <form [formGroup]="filmForm" (ngSubmit)="onSubmitFilm()">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="inputName">Titre</label>
+                        <input formControlName="title" type="text" class="form-control" id="inputName"
+                            placeholder="Nom">
+                        <div
+                            *ngIf="filmForm.controls.title.errors && (filmForm.controls.title.dirty || filmForm.controls.title.touched)">
+                            <small id="titleHelp" class="form-text text-danger"
+                                *ngIf="filmForm.controls.title.errors.required">
+                                Le titre requis!
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputCity">Genre</label>
+                        <select formControlName="genre" class="form-control" id="exampleFormControlSelect1">
+                            <option selected value="Action">Action</option>
+                            <option selected value="Aventure">Aventure</option>
+                            <option selected value="Romance">Romance</option>
+                            <option selected value="Comédie">Comédie</option>
+                            <option selected value="Science-fiction">Science-fiction</option>
+                            <option selected value="Drame">Drame</option>
+                            <option selected value="Thriller">Thriller</option>
+                            <option selected value="horreur">horreur</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputName">Date</label>
+                        <input formControlName="dateprod" type="date" class="form-control" id="inputName"
+                            placeholder="date">
+                        <div
+                            *ngIf="filmForm.controls.dateprod.errors && (filmForm.controls.dateprod.dirty || filmForm.controls.dateprod.touched)">
+                            <small id="dateprodHelp" class="form-text text-danger"
+                                *ngIf="filmForm.controls.dateprod.errors.required">
+                                Date de production requis!
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputName">Duré en min.</label>
+                        <input formControlName="duration" type="number" max="999" min="0" class="form-control"
+                            id="inputName" placeholder="Duré">
+                        <div
+                            *ngIf="filmForm.controls.duration.errors && (filmForm.controls.duration.dirty || filmForm.controls.duration.touched)">
+                            <small id="durationHelp" class="form-text text-danger"
+                                *ngIf="filmForm.controls.duration.errors.required">
+                                Durée requis!
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputYoutube">Id de video youtube</label>
+                        <input formControlName="youtubeid" type="text" class="form-control" id="inputYoutube"
+                            placeholder="Youtube id">
+                        <small id="youtubeidHelp" class="form-text text-dark">
+                            Ex. l'id pour le lien https://www.youtube.com/watch?v=fx2Z5ZD_Rbo est : fx2Z5ZD_Rbo
+                        </small>
+                        <div
+                            *ngIf="filmForm.controls.youtubeid.errors && (filmForm.controls.youtubeid.dirty || filmForm.controls.youtubeid.touched)">
+                            <small id="youtubeidHelp" class="form-text text-danger"
+                                *ngIf="filmForm.controls.youtubeid.errors.required">
+                                L'id de youtube est nécessaire
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button class="btn btn-info" (click)="showFilm()">retour</button>
+                        <span> | </span>
+                        <button type="submit" class="btn btn-success"
+                            [disabled]="!filmForm.valid">{{buttonSubmitText}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
